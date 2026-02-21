@@ -16,6 +16,7 @@ struct ShoppingItem {
     let title: String
     let subTitle: String
     let image: UIImage
+    var isSelected = false
 }
 
 class TableViewViewController: UITableViewController {
@@ -30,14 +31,11 @@ class TableViewViewController: UITableViewController {
             ShoppingItem(title: "Bananas", subTitle: "Buy as many as you can", image: UIImage(systemName: "star.fill")!)
         ])
     ]
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return users.count
@@ -74,7 +72,12 @@ class TableViewViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var shoppingItem = users[indexPath.section].shoppingItems[indexPath.row]
+        shoppingItem.isSelected = !shoppingItem.isSelected
+        tableView.reloadData()
         
+        
+        performSegue(withIdentifier: "", sender: nil)
     }
 
 }
